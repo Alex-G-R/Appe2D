@@ -6,7 +6,7 @@ app.whenReady().then(() => {
     // create a window
     const myWindow = new BrowserWindow({
         width: 1600,
-        height: 900,
+        height: 1000,
         webPreferences: {
             nodeIntegration: true
         }
