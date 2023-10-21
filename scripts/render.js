@@ -57,6 +57,7 @@ function isCollision(square1, square2) {
     return false;
 }
 
+
 function update() {
     // Clear the canvas before drawing the updated position
     context.clearRect(0, 0, boardWidth, boardHeight);
@@ -76,16 +77,14 @@ function update() {
         if (square.y + square.size >= boardHeight) {
             // Stop the square from falling further and place it at the bottom
             square.y = boardHeight - square.size;
-            square.velocityY = 0;
+            square.velocityY = -square.velocityY * ((square.velocityY /2) * (10/100));
         }
 
         // Check for collisions with other squares
         for (const otherSquare of squares) {
             if (square !== otherSquare && isCollision(square, otherSquare)) {
-                // Handle the collision as needed (e.g., change directions, bounce, etc.)
-                // For now, we'll just stop the squares from overlapping.
                 square.y = otherSquare.y - square.size;
-                square.velocityY = 0;
+                square.velocityY = -square.velocityY * ((square.velocityY /2) * (10/100));
             }
         }
 
@@ -94,3 +93,11 @@ function update() {
     }
 }
 
+const resetBtn = document.getElementById("reset");
+
+resetBtn.addEventListener("click", () => {
+    squares = [];
+    context.clearRect(0, 0, boardWidth, boardHeight);
+    context.fillStyle = boardColor;
+    context.fillRect(0, 0, boardWidth, boardHeight);
+});
