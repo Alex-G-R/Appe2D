@@ -77,14 +77,14 @@ function update() {
         if (square.y + square.size >= boardHeight) {
             // Stop the square from falling further and place it at the bottom
             square.y = boardHeight - square.size;
-            square.velocityY = -square.velocityY * ((square.velocityY /2) * (5/100));
+            square.velocityY = -square.velocityY * ((square.velocityY /2) * (10/100));
         }
 
         // Check for collisions with other squares
         for (const otherSquare of squares) {
             if (square !== otherSquare && isCollision(square, otherSquare)) {
                 square.y = otherSquare.y - square.size;
-                square.velocityY = -square.velocityY * ((square.velocityY /2) * (5/100));
+                square.velocityY = -square.velocityY * ((square.velocityY /2) * (10/100));
             }
         }
 
