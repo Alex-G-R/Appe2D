@@ -5,7 +5,7 @@ let context = board.getContext('2d');
 
 // Set the board width and height
 let boardWidth = 1200;
-let boardHeight = 900;
+let boardHeight = 940;
 board.height = boardHeight;
 board.width = boardWidth;
 
@@ -22,6 +22,8 @@ board.style.left = '0';
 const EGP = 9.807; // The average gravitational pull of the Earth
 const FPS = 120;
 
+const numberOfSquaresContainer = document.getElementById("number-of-squares");
+let numberOfSquares = 0;
 
 // Create an array to store the squares
 const squares = [];
@@ -41,6 +43,8 @@ function createSquare(event) {
     const y = event.clientY - board.getBoundingClientRect().top - squareSize / 2;
     
     squares.push({ x, y, size: squareSize, velocityY: 0 });
+    numberOfSquares++;
+    numberOfSquaresContainer.innerHTML = `Squares: ${numberOfSquares}`;
 }
 
 // check collisions
@@ -65,7 +69,7 @@ function update() {
     context.fillRect(0, 0, boardWidth, boardHeight);
 
     // Draw and update the position of each square
-    context.fillStyle = 'rgb(0, 0, 255)'; // Blue color for squares
+    context.fillStyle = 'rgb(25,30,255)'; // Blue color for squares
     for (const square of squares) {
         // Apply gravitational force
         square.velocityY += EGP / 60; // 60 frames per second
@@ -77,14 +81,14 @@ function update() {
         if (square.y + square.size >= boardHeight) {
             // Stop the square from falling further and place it at the bottom
             square.y = boardHeight - square.size;
-            square.velocityY = -square.velocityY * ((square.velocityY /2) * (10/100));
+            square.velocityY = -square.velocityY * ((square.velocityY /2) * (3/100));
         }
 
         // Check for collisions with other squares
         for (const otherSquare of squares) {
             if (square !== otherSquare && isCollision(square, otherSquare)) {
                 square.y = otherSquare.y - square.size;
-                square.velocityY = -square.velocityY * ((square.velocityY /2) * (10/100));
+                square.velocityY = -square.velocityY * ((square.velocityY /2) * (3/100));
             }
         }
 
@@ -96,8 +100,21 @@ function update() {
 const resetBtn = document.getElementById("reset");
 
 resetBtn.addEventListener("click", () => {
-    squares = [];
+    squares.forEach(element => {
+        
+    });
+    numberOfSquares = 0;
+    numberOfSquaresContainer.innerHTML = `Squares: ${numberOfSquares}`;
     context.clearRect(0, 0, boardWidth, boardHeight);
     context.fillStyle = boardColor;
     context.fillRect(0, 0, boardWidth, boardHeight);
 });
+
+
+function randomRGB() {
+    let r = Math.floor(Math.random()*255);
+    let g = Math.floor(Math.random()*255);
+    let b = Math.floor(Math.random()*255);
+
+    return `rgb(${r}, ${g}, ${b})`
+}

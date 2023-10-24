@@ -5,13 +5,32 @@
         *{
             background-color: rgb(34,33,32);
         }
+
+        .container{
+            display: flex;
+        }
+        #box1{
+            width: 1200px;
+        }
+        #box2{
+            font-family: Arial;
+            color: white;
+        }
     </style>
 
 </head>
 
 <body>
-    <button id="reset">Reset</button>
-    <canvas id="canvas"></canvas>
+    <div class="container">
+        <div class="box" id="box1">
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div class="box" id="box2">
+            <h1 id="number-of-squares">Squares: 0</h1>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
     <script src="scripts/render.js"></script>
 </body>
 </html>
