@@ -26,7 +26,7 @@ const numberOfSquaresContainer = document.getElementById("number-of-squares");
 let numberOfSquares = 0;
 
 // Create an array to store the squares
-const squares = [];
+let squares = [];
 
 // Listen for mouse clicks
 board.addEventListener("click", createSquare);
@@ -100,9 +100,7 @@ function update() {
 const resetBtn = document.getElementById("reset");
 
 resetBtn.addEventListener("click", () => {
-    squares.forEach(element => {
-        
-    });
+    squares = [];
     numberOfSquares = 0;
     numberOfSquaresContainer.innerHTML = `Squares: ${numberOfSquares}`;
     context.clearRect(0, 0, boardWidth, boardHeight);
